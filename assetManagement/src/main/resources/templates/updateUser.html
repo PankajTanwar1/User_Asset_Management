@@ -1,0 +1,425 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+      <link th:href = "@{/css/style.css}" rel="stylesheet">
+      
+      <title>Registration</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- header -->
+    <nav class="navbar navbar-expand-sm navbar-dark border-bottom " aria-label="Third navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/MonkeyDLuffy}">MonkeyDLuffy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
+                aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample03">
+                <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                    <li class="nav-item">
+    					<a class="nav-link" aria-current="page" 
+       						th:href="@{/adminDashboard}" sec:authorize="hasRole('ROLE_ADMIN')">Home</a>
+    					<a class="nav-link" aria-current="page" 
+       						th:href="@{/userDashboard}" sec:authorize="hasRole('ROLE_USER')">Home</a>
+					</li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/faq}">FAQs</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                            aria-expanded="false">Dropdown</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                </form>
+                 <div class="text-end">
+         			 <button type="button" class="btn btn-primary mx-2 my-2 " sec:authorize="isAuthenticated()"><a class="text-decoration-none text-white"
+            				  href="/" th:href="@{/logout}">Logout</a></button>
+        		</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main -->
+    <main class="d-flex flex-grow-1 flex-nowrap">
+  
+   	<!-- Sidebar -->
+  	<div class=" d-flex flex-column justify-content-start flex-shrink-0 col-md-3 navbar navbar-expand-md navbar-dark border-end p-1" id="side-bar" style=" max-width:300px">
+  	 
+    	<div class="collapse nav navbar-collapse flex-column justify-content-between" id="navbarTogglerDemo03" style="width:100%">
+    		
+      		<ul class="nav nav-pills mb-auto flex-column" style="width:100%">
+      
+      			<li class="nav-item mt-3 mx-2">
+        			<a th:href="${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? '/adminDashboard' : '/userDashboard'}"
+   						class="text-white text-decoration-none fs-5">
+   						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+  							<path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+						</svg>
+    					<span class="ms-2">Dashboard</span>
+					</a>
+     
+      			</li>
+      	
+      			<hr class="border border-light border-2" />
+      			
+      			<li class="nav-item mt-1 mb-2 mx-1">
+        			<a th:href="@{/assetList}" class="text-decoration-none text-white" aria-current="page">
+          				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box2-fill" viewBox="0 0 16 16">
+  							<path d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 1 0 0 0-.8-.4zM15 4.667V5H1v-.333L1.5 4h6V1h1v3h6z"/>
+						</svg>
+          				<span class=" ms-2">Asset</span>
+        			</a>
+      			</li>
+      			<li class="nav-item mt-3 mb-2 mx-2">
+        			<a th:href="@{/assetRegistration}" class="text-decoration-none text-white" aria-current="page">
+          				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-text " viewBox="0 0 16 16">
+  							<path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+  							<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+  							<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+						</svg>
+          				<span class="ms-2">Asset Registration</span>
+        			</a>
+      			</li>
+      			<li class="nav-item mt-3 mb-2 mx-2">
+        			<a th:href="@{/assetHistory}"class="text-decoration-none text-white">
+          				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise " viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+  							<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+						</svg>
+          				<span class="ms-2">Asset History</span>
+        			</a>
+      			</li>
+      			<li class="nav-item mt-3 mb-2 mx-2">
+        			<a href="#" class="text-decoration-none text-white">
+          				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
+  							<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5M9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8m1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5m-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96q.04-.245.04-.5M7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0"/>
+						</svg>			
+						<span class="ms-2">Asset Categories</span>
+        			</a>
+      			</li>
+      			<li class="nav-item mt-3 mb-2 mx-2">
+        			<a href="#" class="text-decoration-none text-white">
+          				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill " viewBox="0 0 16 16">
+  							<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+						</svg>
+          				<span class="ms-2">Asset Status</span>
+        			</a>
+      			</li>
+  
+      			<li class="nav-item mt-3 mb-2 mx-2 nav-link active">
+        			<a href="#" th:href="@{/UserList}" class="text-decoration-none text-white">
+          				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+  							<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+						</svg>	
+          				<span class="ms-2">Employee</span>
+        			</a>
+      			</li>
+      			
+      			<li class="nav-item mt-3 mb-2 mx-2">
+        			<a th:href="@{${#authorization.expression('hasRole(''ADMIN'')')} ? '/registration/userRegistrationByAdmin' : '/registration'}" class="text-decoration-none text-white">
+          				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+  							<path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+  							<path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+						</svg>	
+          				<span class="ms-2">Employee Registration</span>
+        			</a>
+      			</li>
+      			
+      			<li class="nav-item mt-3 mb-2 mx-2">
+        			<a href="#"  class="text-decoration-none text-white">
+          				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-up " viewBox="0 0 16 16">
+  							<path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 0 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.708l1.5-1.5a.5.5 0 0 1 .708 0M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  							<path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+						</svg>	
+          				<span class="ms-2">Request Module</span>
+        			</a>
+      			</li>
+      			<li class="nav-item mt-3 mb-2 mx-2">
+        			<a href="#" class="text-decoration-none text-white">
+          				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack " viewBox="0 0 16 16">
+  							<path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.6.6 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.6.6 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.6.6 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535z"/>
+  							<path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.6.6 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0z"/>
+						</svg>	
+          				<span class="ms-2">Report</span>
+        			</a>
+      			</li>	
+    		</ul>
+    		<hr>
+    		
+    		<div class="dropdown" style="width:100%">
+      				<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        				<img src="./image/luffy.jpg" alt="img" width="32" height="32" class="rounded-circle ms-3">
+        				<span class="ms-2">Username</span>
+      				</a>
+      				<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        				<li><a class="dropdown-item" href="#">Settings</a></li>
+        				<li><a class="dropdown-item" href="#">Profile</a></li>
+        				<li><hr class="dropdown-divider"></li>
+        				<li><a class="dropdown-item" href="#">Sign out</a></li>
+      				</ul>
+    		</div>
+    	</div>
+    	
+    
+    	<button class="navbar-toggler" id="toggleButton"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      			<span class="navbar-toggler-icon" > </span>
+    	</button>
+    
+    	<a th:href="${#authorization.expression('hasRole(''ROLE_ADMIN'')') ? '/adminDashboard' : '/userDashboard'}"
+   						class="d-md-none text-white text-decoration-none fs-5 my-3 collapsedIcon">
+   						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+  							<path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+						</svg>
+    					
+		</a>
+		
+		<a th:href="@{/assetList}" class="d-md-none text-decoration-none text-white my-3 collapsedIcon" aria-current="page" >
+          				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box2-fill" viewBox="0 0 16 16">
+  							<path d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 1 0 0 0-.8-.4zM15 4.667V5H1v-.333L1.5 4h6V1h1v3h6z"/>
+						</svg>   				
+		</a>
+	
+		<a th:href="@{/assetRegistration}" class="d-md-none text-decoration-none text-white my-3 collapsedIcon" aria-current="page" >
+          				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-journal-text " viewBox="0 0 16 16">
+  							<path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+  							<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+  							<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+						</svg>
+        </a>
+        			
+		<a th:href="@{/assetHistory}"class="d-md-none text-decoration-none text-white my-3 collapsedIcon" >
+          				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-counterclockwise " viewBox="0 0 16 16">
+  							<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+  							<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+						</svg>  				
+        </a>
+        			
+		<a href="#" class="d-md-none text-decoration-none text-white my-3 collapsedIcon" >
+          				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
+  							<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5M9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8m1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5m-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96q.04-.245.04-.5M7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0"/>
+						</svg>					
+        </a>
+        			
+		<a href="#" class="d-md-none text-decoration-none text-white my-3 collapsedIcon" >
+          				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-fill " viewBox="0 0 16 16">
+  							<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+						</svg> 				
+        </a>
+  			
+		<a th:href="@{/UserList}" class="d-md-none text-decoration-none text-white my-3 collapsedIcon" >
+          				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+  							<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+						</svg>				
+        </a>
+        
+        <a th:href="@{/userRegistrationByAdmin}" class="d-md-none text-decoration-none text-white my-3 collapsedIcon" >						
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+  							<path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+  							<path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+						</svg>							
+        </a>
+        			
+		<a href="#"  class="d-md-none text-decoration-none text-white my-3 collapsedIcon" >
+          				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill-up " viewBox="0 0 16 16">
+  							<path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 0 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.708l1.5-1.5a.5.5 0 0 1 .708 0M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  							<path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+						</svg>				
+        </a>
+        			
+		<a href="#" class="d-md-none text-decoration-none text-white my-3 collapsedIcon" >
+          				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-stack " viewBox="0 0 16 16">
+  							<path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.6.6 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.6.6 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.6.6 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535z"/>
+  							<path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.6.6 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0z"/>
+						</svg>					
+        </a>
+        			
+		<a href="#" class="d-md-none d-flex align-items-center text-white text-decoration-none dropdown-toggle mt-auto collapsedIcon"   data-bs-toggle="dropdown" aria-expanded="false">
+        				<img src="./image/luffy.jpg" alt="img" width="32" height="32" class="rounded-circle ms-3">
+      	</a>
+      	<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        				<li><a class="dropdown-item" href="#">Settings</a></li>
+        				<li><a class="dropdown-item" href="#">Profile</a></li>
+        				<li><hr class="dropdown-divider"></li>
+        				<li><a class="dropdown-item" href="#">Sign out</a></li>
+      	</ul>
+   </div>
+    
+    	<!-- Main content area -->
+  	<div class="d-flex flex-column flex-grow-1 p-3">
+		
+    <div
+        class="custom-bg-color card col-10 col-sm-8 col-md-6 offset-1 offset-sm-2 offset-md-3 flex-grow-1 row justify-content-center py-2 my-5">
+        <div class="card-body text-white">
+            <h1 class="card-title" style="text-align: center;">Update User</h1>
+            <hr />
+            
+            <div th:if="${message != null}" class="alert alert-success" role="alert">
+    				<span th:text="${message}"></span>
+			</div>
+				
+            <form class="row g-3" autocomplete="off" th:action="@{/registration/updateUser/{id}(id=${user.id})}" method="post" th:object="${user}">
+            
+            <!--  Add hidden form field to handle update -->
+                <input type="hidden" th:field="*{id}"/>
+                
+                <div class="row g-2">
+                    <div class="col-md-6">
+                        <label for="FirstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" placeholder="First name" aria-label="First name"
+                            id="FirstName" aria-describedby="validationFeedback" th:field="*{firstName}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="LastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name"
+                            id="LastName" th:field="*{lastName}" required>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="Gender" class="form-label">Gender : </label>
+
+                    <div class="form-check form-check-inline mx-1">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" th:field="*{gender}" value="Male">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Male
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline mx-1">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" th:field="*{gender}" value="Female">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Female
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline mx-1">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="other" th:field="*{gender}" value="Other">
+                        <label class="form-check-label" for="flexRadioDefault3">
+                            Other
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="abcd@gmail.com" th:field="*{email}" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="inputPassword4" th:field="*{password}">
+                </div>
+                
+                <div class="col-12 col-md-6">                       
+    				<label for="role" class="form-label">Role</label>
+    				<select class="form-select" aria-label="Default select example" id="role" th:field="*{role}" required>
+         				<option value="USER">User</option>
+        				<option value="ADMIN">Admin</option>
+    				</select>
+				</div> 
+                
+                
+				<!-- <div class="col-6">                       
+        			<label for="role" class="form-label">Role</label>
+        			<select class="form-select" aria-label="Default select example" id="role" th:field="*{role}" required>
+            			<option value="USER" th:selected="${user.role.name == 'USER'}">User</option>
+            			<option value="ADMIN" th:selected="${user.role.name == 'ADMIN'}">Admin</option>
+        			</select>
+    			</div> 
+    			 -->
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="H.No. / Street no." th:field="*{address}" required>
+                </div>
+                
+
+                <div class="col-md-5">
+                    <label for="inputCity" class="form-label">City</label>
+                    <input type="text" class="form-control" id="inputCity" th:field="*{city}" required>
+                </div>
+
+                <div class="col-md-4 ">
+                    <label for="state">State</label>
+                    <input class="form-control mt-2" list="states" name="State" id="state" th:field="*{state}" placeholder="Type to Search"
+                        required>
+                    <!-- <option id="browsers">Choose...</option> -->
+                    <datalist id="states">
+                        <option>Andra Pradesh</option>
+                        <option>Arunachal Pradesh</option>
+                        <option>Assam</option>
+                        <option>Bihar</option>
+                        <option>Chhatisgarh</option>
+                        <option>Delhi</option>
+                        <option>Goa</option>
+                        <option>Gujarat</option>
+                        <option>Haryana</option>
+                        <option>Himachal Pradesh</option>
+                        <option>Jharkhand</option>
+                        <option>Karnatka</option>
+                        <option>Kerala</option>
+                        <option>Madhya Pradesh</option>
+                        <option>Maharashtra</option>
+                        <option>Manipur</option>
+                        <option>Meghalya</option>
+                        <option>Mizoram</option>
+                        <option>Nagaland</option>
+                        <option>Odisha</option>
+                        <option>Punjab</option>
+                        <option>Rajasthan</option>
+                        <option>Sikkim</option>
+                        <option>Tamil Nadu</option>
+                        <option>Telangana</option>
+                        <option>Tripura</option>
+                        <option>Uttar Pradesh</option>
+                        <option>Uttarakhand</option>
+                        <option>West Bengal</option>
+
+                    </datalist>
+                </div>
+                <div class="col-md-3">
+                    <label for="inputZip" class="form-label">Zip</label>
+                    <input type="text" class="form-control" id="inputZip" th:field="*{zip}" required>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+		</div>
+	</div>
+</main>
+
+
+    <!--Footer-->
+    <footer class="py-3 mt-2 ">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="/" th:href="@{/index}" class="nav-link px-2 text-white">Home</a></li>
+            <li class="nav-item"><a href="/" th:href="@{/UserList}" class="nav-link px-2 text-white">User List</a></li>
+            <li class="nav-item"><a href="/" th:href="@{/faq}" class="nav-link px-2 text-white">FAQs</a></li>
+            <li class="nav-item"><a href="/" th:href="@{/MonkeyDLuffy}" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+        <p class="text-center text-white">© 2024 MonkeyDLuffy</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Asset Details</h1>
+
+        <!-- Check if the asset object is present -->
+        <div th:if="${asset != null}">
+            <div class="card">
+                <div class="card-header">
+                    <h3 th:text="${asset.name}">Asset Name</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Model Number:</strong> <span th:text="${asset.modelNumber}">Model Number</span></p>
+                            <p><strong>Assigned Employee:</strong> <span th:text="${asset.assignedEmployee}">Assigned Employee</span></p>
+                            <p><strong>Department:</strong> <span th:text="${asset.department}">Department</span></p>
+                            <p><strong>Unit Price:</strong> <span th:text="${asset.unitPrice}">Unit Price</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Date of Purchase:</strong> <span th:text="${asset.dateOfPurchase}">Date of Purchase</span></p>
+                            <p><strong>Date of Manufacture:</strong> <span th:text="${asset.dateOfManufacture}">Date of Manufacture</span></p>
+                            <p><strong>Date of Assignment:</strong> <span th:text="${asset.dateOfAssignment}">Date of Assignment</span></p>
+                            <p><strong>Description:</strong> <span th:text="${asset.description}">Description</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- If an image is available, show it -->
+                <div class="card-footer text-center" th:if="${asset.imagePath != null}">
+                    <img th:src="@{'/uploads/' + ${asset.imagePath}}" alt="Asset Image" class="img-fluid img-thumbnail" style="max-width: 300px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- If the asset is not present, display an error message -->
+        <div th:if="${asset == null}">
+            <p class="text-danger">Asset not found!</p>
+        </div>
+
+        <!-- Back button -->
+        <div class="text-center mt-3">
+            <a href="/assetList" class="btn btn-secondary">Back to Asset List</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

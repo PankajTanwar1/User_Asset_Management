@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link th:href = "@{/css/style.css}" rel="stylesheet">
+    
+    </style>
+    <title>FAQ</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+
+    <!-- header -->
+    <nav class="navbar navbar-expand-sm navbar-dark border-bottom " aria-label="Third navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/MonkeyDLuffy}">MonkeyDLuffy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
+                aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample03">
+                <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                    <li class="nav-item">
+    					<a class="nav-link" aria-current="page" 
+       						th:href="@{/adminDashboard}" sec:authorize="hasRole('ROLE_ADMIN')">Home</a>
+    					<a class="nav-link" aria-current="page" 
+       						th:href="@{/userDashboard}" sec:authorize="hasRole('ROLE_USER')">Home</a>
+					</li>
+                    <li class="nav-item ">
+                        <a class="nav-link active" th:href="@{/faq}">FAQs</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                            aria-expanded="false">Dropdown</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                </form>
+                 <div class="text-end">
+          			<button type="button" class="btn btn-primary mx-2 my-2 " sec:authorize="isAuthenticated()"><a class="text-decoration-none text-white"
+              		href="/" th:href="@{/logout}">Logout</a></button>
+        		</div>
+            </div>
+        </div>
+    </nav>
+
+    <!--content-->
+    <main class="custom-bg-color card col-8  offset-2  flex-grow-1 row justify-content-center py-2 my-5">
+        <div class="card-body text-dark">
+            <h1 class="card-title text-light " style="text-align: center;">FAQs</h1>
+            <hr />
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseOne">
+                            <h5>Personality</h5>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <p><strong>Luffy</strong> is portrayed as a carefree,fun-loving, happy-go-lucky character
+                                with
+                                great ambition and a huge appetite, often thinking with his stomach and comically
+                                gorging
+                                himself. Optimistic and generally good-hearted, he is not as dimwitted as many believe
+                                him
+                                to be, and he often demonstrates more understanding than the other characters expect.
+                                Knowing the danger ahead, Luffy is willing to risk his life to become King of the
+                                Pirates
+                                and protect his crew. A capable and reliable captain, he never puts his crew or himself
+                                at
+                                risk out of incompetence. During the Loguetown story arc, Smoker (a navy captain at the
+                                time) says that Luffy "enjoys playing stupid"; Luffy responds with a mysterious smile.
+                            </p>
+                            <p>
+                                He enlists Chopper and Brook for his crew not just for their personality or appearance,
+                                but
+                                also because of his instinctive ability to read people. Luffy needs key jobs filled by
+                                his
+                                crew (cook, navigator, medic, musician, and shipwright, filled by Sanji, Nami, Chopper,
+                                Brook, and Franky, respectively). At the beginning of the series, he said that he wanted
+                                at
+                                least ten crew members with abilities he felt necessary for his goal. Despite his
+                                carefree
+                                personality, each crew member respects him in their own way. Luffy is rarely
+                                concerned about the consequences of his actions, doing what he feels is right at the
+                                moment,
+                                even if it leads to retaliation by a powerful force. He is an extremely loyal captain,
+                                who has demonstrated throughout the series that he is willing to risk his life for the
+                                well-being of his crew.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseTwo">
+                            <h5>Devil Fruit</h5>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <p>
+                                Luffy's rubber attributes are a result of him eating a devil fruit called the
+                                Human-Human
+                                fruit model Sun God Nika. This devil fruit is thought to be called the Gum-Gum fruit do
+                                to
+                                the world governments propaganda. Granting him a rubber-like body, his powers make him
+                                immune to electric attacks and most blunt forces, but he is susceptible to attacks made
+                                with
+                                a sharp object or weapon (eg. sword, spear). His rubber devil fruit powers grant him the
+                                ability to stretch his body at will. He uses his elasticity to accelerate part or all of
+                                his
+                                body to deliver punches, kicks, head butts, and many other varied attacks as seen
+                                throughout
+                                the series. Although like others who have eaten a Devil Fruit, Luffy cannot swim; when
+                                he is
+                                submerged in water or contacts the Sea-Prism Stone, he loses his strength and cannot
+                                move on
+                                his own. In addition to his Devil Fruit powers, he has immense strength, durability,
+                                speed,
+                                reflexes, agility, endurance, and stamina.
+                            </p>
+                            <p>
+                                Luffy's signature attack is the Gum-Gum Pistol (ゴムゴムの銃ピストル, Gomu Gomu no Pisutoru), a
+                                punch
+                                which he learned during years of training. Another technique developed later in the
+                                series
+                                is Gear 2 (ギア2セカンド, Gia Sekando), which increases his strength and speed for a short
+                                time
+                                but strains his body and can shorten his lifespan if used too long. Observing CP9's
+                                Shave
+                                (剃, Soru) technique, Luffy adapts the move to his rubber body and matches the assassins'
+                                speed. Gear 3 (ギア3サード, Gia Sādo), another technique, uses air in his bones to attack but
+                                makes him shrink afterward. Luffy can use both techniques simultaneously; after the two
+                                year
+                                time skip, he gains better control of these techniques and is no longer affected by
+                                their
+                                drawbacks.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseThree">
+                            <h5>Haki</h5>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <p>
+                                Luffy has the ability to use Haki (覇気, ambition). This ability has three types: Armament
+                                Haki (武装色の覇気, Busōshoku no Haki), an armor-like force, which can amplify defense and the
+                                force of attacks and negate a Devil Fruit user's defense, allow physical contact and
+                                damage;
+                                Observation Haki (見聞色の覇気, Kenbunshoku no Haki), a sixth sense, which can read a person's
+                                moves and detect their presence; and Conqueror's Haki (覇王色の覇気, Haōshoku no Haki), which
+                                can
+                                render weak-willed people or animals near him unconscious. Luffy learns all those types
+                                of
+                                Haki and uses them with his improved attacks.
+                            </p>
+                            <p>
+                                As a result of his encounter with Magellan, he has also developed an immunity to poison
+                                (although it is shown that a strong poison may affect him, albeit very slowly). During
+                                his
+                                fight against Charlotte Katakuri, Luffy gains an advanced form of Observation Haki
+                                (Called
+                                Future Sight) to see several seconds into the future. During his time at Udon prison in
+                                Wano, Luffy gains two new advanced forms of Armament Haki. The first one is called
+                                Emission
+                                to shoot a short blast of Haki from a distance while the second one is called Internal
+                                Destruction which can also go inside his target's body or objects and destroy it from
+                                within.[44] During his fight with Kaidou at the top of Onigashima, Luffy unlocks an
+                                advanced
+                                form of Conqueror's Haki. It is the ability to coat his entire body with it, similar to
+                                Armament Haki, which could further enhance his attacks.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseFour">
+                            <h5>Bounty</h5>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <p>
+                                Throughout One Piece, the bounty placed on Luffy continually increases as he faces off
+                                against increasingly powerful pirates, representing his notoriety in the One Piece
+                                world. After defeating Buggy, Don Krieg, and Arlong of East Blue, early on in the
+                                series, Luffy's initial bounty is set to 30,000,000 Berries. By the major timeskip in
+                                One Piece, this number had increased to 400,000,000 Berries after defeating some of the
+                                Seven Warlords of the Sea, rampaging at Enies Lobby, and retaking Nico Robin. In current
+                                arcs, Luffy's total bounty has increased to 3 billion Berries after becoming one of the
+                                "Four Emperors in the New World."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseFive">
+                            <h5>Development</h5>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <p>
+                                When Eiichiro Oda created Luffy, he strove for a "manliness" similar to that of Akira
+                                Toriyama's Dragon Ball series. Oda said that he named his main character "Luffy" because
+                                he felt that the name suited him. When he later learned about the sailing term,
+                                "luffing", he was delighted by the coincidence. In his prototype one-shot, "Romance
+                                Dawn", Oda refined the artistic style and story elements before publishing the final
+                                product a year later as the first chapter of One Piece. In the second version of
+                                "Romance Dawn", Luffy resembled his design at the beginning of the series. After the
+                                one-shot of One Piece was made, Oda contacted his former mentor, Nobuhiro Watsuki, whom
+                                he assisted in making the manga Rurouni Kenshin.
+                            </p>
+                            <p>
+                                Watsuki was pleased with Luffy's characterization and advised Oda to briefly change him
+                                for the main series to make it look like Luffy is always acting on his own free will. To
+                                please his readers, Oda added rubberization to Luffy for comic effect and tries to make
+                                the character straightforward. In retrospect, Watsuki felt characters like Luffy reflect
+                                a trend of heroes who do not kill their enemies similar to his character Himura Kenshin.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseSix">
+                            <h5>Portrayals</h5>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <p>
+                                In the original Japanese version of the One Piece anime series and later spin-offs of
+                                the franchise, Luffy is voiced by Mayumi Tanaka.[18] Tanaka said jokingly that she
+                                regrets providing Luffy's voice because she is a mother in real life and Luffy is much
+                                younger. Asked about her voicing, Tanaka said that she "strives for reality" in scenes
+                                where Luffy speaks when he is eating or touching his nose. In the OVA Defeat the Pirate
+                                Ganzack!, Luffy was voiced by Urara Takano.
+                            </p>
+                            <p>
+                                In Odex's English-dubbed VCDs produced by Voiceovers Unlimited, Luffy is voiced by Chuck
+                                Powers, the director of said English version. In this edition his name is mispronounced
+                                as "Luh-fee" (/ˈlʌfiː/). The character was voiced by Erica Schroeder in 4Kids
+                                Entertainment's English-language dubs of the franchise between 2004–2006. Following
+                                Funimation/Crunchyroll's acquisition of the franchise license in 2007, Colleen
+                                Clinkenbeard became the voice of Luffy in all English-language releases.
+                            </p>
+                            <p>
+                                In the live action adaptation of One Piece, Luffy is portrayed by Mexican actor Iñaki
+                                Godoy. Godoy and Tanaka reprised their roles as Luffy in the Spanish and Japanese dubs
+                                of the adaptation respectively.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!--Footer-->
+    <footer class="py-3 mt-2 ">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="/" th:href="@{/index}" class="nav-link px-2 text-white">Home</a></li>
+            <li class="nav-item"><a href="/" th:href="@{/UserList}" class="nav-link px-2 text-white">User List</a></li>
+            <li class="nav-item"><a href="/" th:href="@{/faq}" class="nav-link px-2 text-white">FAQs</a></li>
+            <li class="nav-item"><a href="/" th:href="@{/MonkeyDLuffy}" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+        <p class="text-center text-white">© 2024 MonkeyDLuffy</p>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

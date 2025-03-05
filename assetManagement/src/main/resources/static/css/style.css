@@ -1,0 +1,44 @@
+body{
+	  display:flex;
+	  flex-direction : column;
+	  min-height : 100vh;
+	  background-image: url("/image/bgimage.jpg");
+      background-size: cover;
+}
+.card{
+	overflow: hidden;
+	border-radius: 10px;
+}
+.custom-bg-color{
+      background-color:  rgba(4, 30, 54, 0.7);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+#side-bar {
+	background-color:  rgba(4, 30, 54, 0.7);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 10px;
+}
+
+nav {
+      background-color: rgba(3, 24, 44, 0.8);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border-radius: 10px;
+    }
+
+footer {
+      background-color: rgba(3, 24, 44, 0.8);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+.rounded-circle {
+            border-radius: 50% !important;
+        }
+        
+#assetChart {
+    background-color: white; 
+}
+
